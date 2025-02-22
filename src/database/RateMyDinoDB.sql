@@ -8,9 +8,42 @@ USE RATE_MY_DINO_DB;
 -- User Login information
 DROP TABLE IF EXISTS USER;
 CREATE TABLE USER (
-    id          int PRIMARY KEY AUTO_INCREMENT,
-    email       VARCHAR(255) UNIQUE NOT NULL,
-    pwd         VARCHAR(255) NOT NULL,
-    firstName   VARCHAR(50) NOT NULL,
-    lastName    VARCHAR(50) NOT NULL,
+    userID          int PRIMARY KEY AUTO_INCREMENT,
+    email           VARCHAR(255) UNIQUE NOT NULL,
+    pwd             VARCHAR(255) NOT NULL,
+    firstName       VARCHAR(50) NOT NULL,
+    lastName        VARCHAR(50) NOT NULL,
 );
+
+-- Professor Information
+DROP TABLE IF EXISTS PROFESSOR;
+CREATE TABLE PROFESSOR (
+    professorID     int PRIMARY KEY AUTO_INCREMENT,
+    firstName       VARCHAR(50) NOT NULL,
+    lastName        VARCHAR(50) NOT NULL,
+
+    overallScore    FLOAT(2, 1) NOT NULL,
+);
+
+-- Course Information
+DROP TABLE IF EXISTS COURSE;
+CREATE TABLE COURSE (
+    courseID        int PRIMARY KEY AUTO_INCREMENT,
+    courseCode      VARCHAR(4) NOT NULL,
+    courseNum       int NOT NULL,
+);
+
+-- Review Information
+DROP TABLE IF EXISTS REVIEW;
+CREATE TABLE REVIEW (
+    reviewID        int PRIMARY KEY AUTO_INCREMENT,
+    courseID        int NOT NULL,
+    professorID     int NOT NULL,
+
+    review          VARCHAR(350) NOT NULL,
+    score           FLOAT(2, 1) NOT NULL,
+
+    FOREIGN KEY (courseID) REFERENCES COURSE(courseID),
+    FOREIGN KEY (professorID) REFERENCES PROFESSOR(professorID)
+);
+
