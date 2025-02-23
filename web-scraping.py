@@ -8,7 +8,7 @@ helpful_regex = r'"helpfulRating":([^,]+),'
 clarity_regex = r'"clarityRating":([^,]+),'
 difficulty_regex = r'"difficultyRating":([^,]+),'
 
-def get_professor_ratings(professor_id: int):
+def get_professor_ratings(professor_id: int, class_id: str) -> pd.DataFrame:
     r = requests.get(f'https://www.ratemyprofessors.com/professor/{professor_id}')
     content = str(r.content)
 
@@ -20,7 +20,9 @@ def get_professor_ratings(professor_id: int):
         "difficulty_rating": re.findall(difficulty_regex, content)
     }
 
-    return pd.DataFrame(data)
+    df = pd.DataFrame(data)
+
+    return df[df["class"] == class_id]
 
 if __name__ == "__main__":
-    get_professor_ratings(1469464)
+    print(get_professor_ratings(1469464, "ENEL453"))
