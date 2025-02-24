@@ -24,5 +24,11 @@ def get_professor_ratings(professor_id: int, class_id: str) -> pd.DataFrame:
 
     return df[df["class"] == class_id]
 
+def get_professor_name(professor_id: int) -> str:
+    r = requests.get(f'https://www.ratemyprofessors.com/professor/{professor_id}')
+    content = str(r.content)
+
+    
+
 if __name__ == "__main__":
     print(get_professor_ratings(1469464, "ENEL453"))
