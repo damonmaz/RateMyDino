@@ -18,26 +18,11 @@ def extract_professors(filename):
     # Find all professor divs
     for card in soup.find_all("a", class_="TeacherCard__StyledTeacherCard-syjs0d-0 dLJIlx"):
         
-        cardCount.append(cardCount)
-        
-        info_rating_div = card.find("div", class_="TeacherCard__InfoRatingWrapper-syjs0d-3 kcbPEB")
-        
+        for info_rating_wrapper in card.find_all("div", class_="TeacherCard__InfoRatingWrapper-syjs0d-3 kcbPEB"):
+            for card_info in info_rating_wrapper.find_all("div", class_="TeacherCard__CardInfo-syjs0d-1 fkdYMc"):
+                for name_info in card_info.find_all("div", class_="CardName__StyledCardName-sc-1gyrgim-0 cJdVEK"):
+                    print(name_info.text)
 
-        # Extract professor name
-        name_div = card.find("div", class_="CardName__StyledCardName-sc-1gyrgim-0 cJdVEK")
-        
-        name = name_div.get_text(strip=True) if name_div else "Unknown"
-
-        
-
-        # Extract professor URL
-        link = card.find("a", href=True)
-        if link and "professor" in link["href"]:
-            prof_id = link["href"].split("/")[-1]
-            url = f"https://www.ratemyprofessors.com/professor/{prof_id}"
-            professors.append((name, prof_id))
-
-    print(counter)
     return professors
 
 # Example usage
