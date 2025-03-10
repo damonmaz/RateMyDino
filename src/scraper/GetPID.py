@@ -19,7 +19,6 @@ def extract_professors(filename):
             # Get the URL value
             pID = str(card['href']).replace("https://www.ratemyprofessors.com/professor/", "")
 
-
             # Get the names
             for card_info in info_rating_wrapper.find_all("div", class_="TeacherCard__CardInfo-syjs0d-1 fkdYMc"):
                 for name_info in card_info.find_all("div", class_="CardName__StyledCardName-sc-1gyrgim-0 cJdVEK"):
@@ -29,10 +28,9 @@ def extract_professors(filename):
             
     return professors
 
-# Example usage
-filename = "ScrapedSearchPage.htm"  # Replace with your actual HTML file name
+filename = "ScrapedSearchPage.htm" 
 professors = extract_professors(filename)
 
-# Print results
+# test results
 
 print(professors["Maryam Hachem"])
