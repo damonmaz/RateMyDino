@@ -28,9 +28,10 @@ def extract_professors(filename):
             
     return professors
 
-filename = "ScrapedSearchPage.htm" 
-professors = extract_professors(filename)
 
-# test results
-
-print(professors["Maryam Hachem"])
+if __name__ == "__main__":
+    filename = "ScrapedSearchPage.htm" 
+    professors = extract_professors(filename)
+    
+    # test results
+    print(professors["Maryam Hachem"])
