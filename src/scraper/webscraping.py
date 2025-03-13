@@ -10,6 +10,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
+from GetPID import extract_professors
+
 class WebScraper:
     comment_regex = r'"comment":"([^"]+)"'
     class_regex = r'"class":"([^"]+)"'
@@ -18,12 +20,22 @@ class WebScraper:
     difficulty_regex = r'"difficultyRating":([^,]+),'
 
 
-    def __init__(self, professor_id: int, class_id: str):
-        self.professor_id = professor_id
+    # def __init__(self, professor_id: int, class_id: str):
+    #     self.professor_id = professor_id
+    #     self.class_id = class_id
+
+    #     self.professor_name = self.__get_professor_name()
+    #     self.professor_tags = self.__get_professor_tags()
+    #     self.class_ratings = self.__get_class_ratings()
+
+
+    def __init__(self, professor_map: dict, class_id: str):
+        self.professor_map = professor_map
+        self.professor_name = next(iter(self.professor_map))
+        self.professor_id = professor_map[self.professor_name]
         self.class_id = class_id
 
-        self.professor_name = self.__get_professor_name()
-        self.professor_tags = self.__get_professor_tags()
+        # self.professor_tags = self.__get_professor_tags() # commented out for testing
         self.class_ratings = self.__get_class_ratings()
 
 
@@ -40,8 +52,22 @@ class WebScraper:
 
 
     def __get_class_ratings(self) -> pd.DataFrame:
-        r = requests.get(f'https://www.ratemyprofessors.com/professor/{self.professor_id}')
+
+        # headers is supposed to mimic a real user and try and fool the antibot policies of rmp
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+            "Referer": "https://www.ratemyprofessors.com/"
+        }
+
+        url = f'https://www.ratemyprofessors.com/professor/{self.professor_id}'
+        r = requests.get(url, headers=headers)
+        
+        if r.status_code == 403:
+            print("403 Forbidden: Access Denied.")
+            return pd.DataFrame()
+
         content = str(r.content)
+        
 
         data = {
             "class": re.findall(self.class_regex, content),
@@ -52,25 +78,7 @@ class WebScraper:
         }
 
         professor_ratings = pd.DataFrame(data)
-        class_ratings = professor_ratings[professor_ratings["class"] == self.class_id]
-
-        return class_ratings
-
-
-    def __get_professor_name(self) -> str:
-        url = f'https://www.ratemyprofessors.com/professor/{self.professor_id}'
-
-        options = webdriver.ChromeOptions()
-        options.add_argument("--headless")
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-
-        driver.get(url)
-
-        try:
-            name_element = driver.find_element(By.CLASS_NAME, "NameTitle__NameWrapper-dowf0z-2")
-            return name_element.text
-        except:
-            return "Could not find professor's name. The website structure may have changed."
+        return professor_ratings[professor_ratings["class"] == self.class_id]
 
 
     def __get_professor_tags(self) -> list:
@@ -101,9 +109,14 @@ class WebScraper:
 
 if __name__ == "__main__":
 
-    OnenTag = 1469464
-    ClassTag = "ENEL453"
+    professor_map = extract_professors("ScrapedSearchPage.htm")
 
-    webscraper = WebScraper(OnenTag, ClassTag)
+    name = input("Name of prof: ")
+    class_id = input("Class: ")
 
-    print(webscraper.get_professor_tags())
+    prof_id = professor_map[name]
+
+    args = {name: prof_id}
+
+    webscraper = WebScraper(args, class_id)    
+    print(webscraper.get_class_ratings())

@@ -3,8 +3,6 @@ import pandas as pd
 
 professorsExtracted = pd.DataFrame()
 
-cardCount = []
-
 def extract_professors(filename):
     with open(filename, "r", encoding="utf-8") as file:
         soup = BeautifulSoup(file, "html.parser")
@@ -24,7 +22,7 @@ def extract_professors(filename):
                 for name_info in card_info.find_all("div", class_="CardName__StyledCardName-sc-1gyrgim-0 cJdVEK"):
                     name = name_info.text
 
-            professors[name] = pID
+            professors[name] = pID # add entry to dict
             
     return professors
 
