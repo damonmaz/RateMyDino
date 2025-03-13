@@ -37,6 +37,7 @@ class WebScraper:
 
         # self.professor_tags = self.__get_professor_tags() # commented out for testing
         self.class_ratings = self.__get_class_ratings()
+        self.all_ratings = self.__get_all_ratings()
 
 
     def get_professor_name(self) -> str:
@@ -49,6 +50,10 @@ class WebScraper:
 
     def get_class_ratings(self) -> pd.DataFrame:
         return self.class_ratings
+    
+
+    def get_all_ratings(self) -> pd.DataFrame:
+        return self.all_ratings
 
 
     def __get_class_ratings(self) -> pd.DataFrame:
@@ -81,6 +86,34 @@ class WebScraper:
         return professor_ratings[professor_ratings["class"] == self.class_id]
 
 
+    def __get_all_ratings(self) -> pd.DataFrame:
+
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+            "Referer": "https://www.ratemyprofessors.com/"
+        }
+
+        url = f'https://www.ratemyprofessors.com/professor/{self.professor_id}'
+        r = requests.get(url, headers=headers)
+
+        if r.status_code == 403:
+            print("Shit we got 403 bruh")
+            return pd.DataFrame()
+
+        content = str(r.content)
+
+        data = {
+            "class": re.findall(self.class_regex, content),
+            "comment": re.findall(self.comment_regex, content),
+            "helpful_rating": re.findall(self.helpful_regex, content),
+            "clarity_rating": re.findall(self.clarity_regex, content),
+            "difficulty_rating": re.findall(self.difficulty_regex, content)
+        }
+
+        all_reviews = pd.DataFrame(data)
+        return all_reviews
+    
+
     def __get_professor_tags(self) -> list:
 
         url = f'https://www.ratemyprofessors.com/professor/{self.professor_id}'
@@ -107,6 +140,7 @@ class WebScraper:
         except:
             return []
 
+
 if __name__ == "__main__":
 
     professor_map = extract_professors("ScrapedSearchPage.htm")
@@ -118,5 +152,5 @@ if __name__ == "__main__":
 
     args = {name: prof_id}
 
-    webscraper = WebScraper(args, class_id)    
+    webscraper = WebScraper(args, class_id)
     print(webscraper.get_class_ratings())
