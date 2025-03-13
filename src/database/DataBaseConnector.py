@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector # type: ignore
 from database import secret_db as sdb
 
 

@@ -1,5 +1,5 @@
 from ..AI_control import secret as s
-from openai import OpenAI
+from openai import OpenAI # type: ignore
 from scraper.reviews_scraper import get_professor_reviews
 
 client = OpenAI(

@@ -1,8 +1,8 @@
 # from control.AI_control import LLM as llm
-from scraper import WebScraper
-from scraper import extract_professors
+from scraper.webscraping import WebScraper
+from scraper.webscraping import extract_professors
 
-professor_map = extract_professors("ScrapedSearchPage.htm")
+professor_map = extract_professors("scraper/ScrapedSearchPage.htm")
 
 name = input("Name of prof: ")
 class_id = input("Class: ")

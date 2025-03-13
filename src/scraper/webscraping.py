@@ -1,8 +1,8 @@
 import re
-import requests
-import pandas as pd
-from bs4 import BeautifulSoup
-from GetPID import extract_professors
+import requests # type: ignore
+import pandas as pd # type: ignore
+from bs4 import BeautifulSoup # type: ignore
+from scraper.GetPID import extract_professors
 
 class WebScraper:
 
