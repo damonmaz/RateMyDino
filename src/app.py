@@ -1,7 +1,11 @@
 # from control.AI_control import LLM as llm
+
+# THIS FILE IS FOR TESTING PURPOSES RIGHT NOW
+# IT WILL BE RESPOSIBLE FOR STARTING THE FLASK SERVER
+
 from scraper.webscraping import WebScraper
 from scraper.webscraping import extract_professors
-from control.AI_control.LLM import summarize_reviews
+from llm.LLM import summarize_reviews
 
 professor_map = extract_professors("scraper/ScrapedSearchPage.htm")
 

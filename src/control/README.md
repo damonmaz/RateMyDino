@@ -1,1 +1,0 @@
-This will be the layer that communicates between frontend and DB

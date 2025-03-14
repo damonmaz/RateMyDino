@@ -1,6 +1,7 @@
-from ..AI_control import secret as s
+from llm import secret as s
 from openai import OpenAI # type: ignore
-from scraper.reviews_scraper import get_professor_reviews
+from models.review import ReviewModel
+
 
 client = OpenAI(
   api_key=s.OPENAI_KEY
@@ -37,7 +38,7 @@ def summarize_reviews(reviews):
 
 if __name__ == "__main__":
     print ("John Doe")
-    sample_reviews = get_professor_reviews("John Doe")
+    sample_reviews = ReviewModel.get_professor_reviews("John Doe")
 
     summary = summarize_reviews(sample_reviews)
     print(summary)
