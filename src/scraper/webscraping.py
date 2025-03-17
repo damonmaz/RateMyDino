@@ -3,6 +3,8 @@ import requests # type: ignore
 import pandas as pd # type: ignore
 from bs4 import BeautifulSoup # type: ignore
 from scraper.GetPID import extract_professors
+from scraper.to_json import to_json
+
 
 class WebScraper:
 
@@ -175,11 +177,14 @@ class WebScraper:
         tags = [tag.text.strip() for tag in tag_container.find_all("span", class_="Tag-bs9vf4-0")] # classes that contain the top tags 
 
         return tags
+    
+
 
 
 if __name__ == "__main__":
 
     professor_map = extract_professors("ScrapedSearchPage.htm")
+    # to_json(professor_map)
 
     name = input("Name of prof: ")
     class_id = input("Class: ")
