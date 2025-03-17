@@ -26,8 +26,8 @@ class WebScraper:
             class_id (str): The ID of the class to filter ratings for.
         """
         self.professor_map = professor_map
-        self.professor_name = next(iter(self.professor_map))
-        self.professor_id = professor_map[self.professor_name]
+        self.professor_id = next(iter(self.professor_map))
+        self.professor_name = professor_map[self.professor_id]
         self.class_id = class_id
 
         self.professor_tags = self.__get_professor_tags()
@@ -184,9 +184,9 @@ if __name__ == "__main__":
     name = input("Name of prof: ")
     class_id = input("Class: ")
 
-    prof_id = professor_map[name]
+    prof_id = list(professor_map.keys())[list(professor_map.values()).index(name)]
 
-    args = {name: prof_id}
+    args = {prof_id: name}
 
     webscraper = WebScraper(args, class_id)
     print(webscraper.get_all_ratings())

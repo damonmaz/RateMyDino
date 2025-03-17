@@ -35,7 +35,7 @@ def extract_professors(filename):
                 for name_info in card_info.find_all("div", class_="CardName__StyledCardName-sc-1gyrgim-0 cJdVEK"):
                     name = name_info.text
 
-            professors[name] = pID # add entry to dict
+            professors[pID] = name # add entry to dict
             
     return professors
 
