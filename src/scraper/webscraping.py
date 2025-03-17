@@ -6,6 +6,10 @@ from scraper.GetPID import extract_professors
 
 class WebScraper:
 
+    """
+    A web scraper for extracting professor reviews and ratings from RateMyProfessors.
+    """
+
     comment_regex = r'"comment":"([^"]+)"'
     class_regex = r'"class":"([^"]+)"'
     helpful_regex = r'"helpfulRating":([^,]+),'
@@ -14,6 +18,13 @@ class WebScraper:
 
 
     def __init__(self, professor_map: dict, class_id: str):
+        """
+        Initializes the WebScraper instance with professor data and a class ID.
+
+        Args:
+            professor_map (dict): A dictionary mapping professor names to their RateMyProfessors IDs.
+            class_id (str): The ID of the class to filter ratings for.
+        """
         self.professor_map = professor_map
         self.professor_name = next(iter(self.professor_map))
         self.professor_id = professor_map[self.professor_name]
@@ -25,22 +36,50 @@ class WebScraper:
 
 
     def get_professor_name(self) -> str:
+        """
+        Retrieves the professor's name.
+
+        Returns:
+            str: The name of the professor.
+        """
         return self.professor_name
 
-
     def get_professor_tags(self) -> list[str]:
+        """
+        Retrieves the top descriptive tags for the professor.
+
+        Returns:
+            list[str]: A list of tags describing the professor.
+        """
         return self.professor_tags
 
-
     def get_class_ratings(self) -> pd.DataFrame:
+        """
+        Retrieves ratings specific to the given class.
+
+        Returns:
+            pd.DataFrame: A DataFrame containing class-specific ratings and comments.
+        """
         return self.class_ratings
-    
 
     def get_all_ratings(self) -> pd.DataFrame:
+        """
+        Retrieves all ratings for the professor, regardless of class.
+
+        Returns:
+            pd.DataFrame: A DataFrame containing all ratings and comments.
+        """
         return self.all_ratings
 
 
     def __get_class_ratings(self) -> pd.DataFrame:
+
+        """
+        Fetches and filters reviews for a specific class.
+
+        Returns:
+            pd.DataFrame: A DataFrame containing ratings and comments for the specified class.
+        """
 
         # headers is supposed to mimic a real user and try and fool the antibot policies of rmp
         headers = {
@@ -72,6 +111,13 @@ class WebScraper:
 
     def __get_all_ratings(self) -> pd.DataFrame:
 
+        """
+        Fetches all reviews for the professor.
+
+        Returns:
+            pd.DataFrame: A DataFrame containing all ratings and comments for the professor.
+        """
+
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
             "Referer": "https://www.ratemyprofessors.com/"
@@ -99,6 +145,13 @@ class WebScraper:
     
 
     def __get_professor_tags(self) -> list:
+
+        """
+        Extracts the professor's top descriptive tags.
+
+        Returns:
+            list: A list of tags that describe the professor's teaching style.
+        """
 
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
