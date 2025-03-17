@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
 import { Titillium_Web } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import "./globals.css";
@@ -13,7 +14,10 @@ export default function Layout({ children }) {
   return (
     <html lang="en" className={titillium.className}>
       <body>
-        <SessionProvider>{children}</SessionProvider>
+        <SessionProvider>
+          <Navbar />
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );

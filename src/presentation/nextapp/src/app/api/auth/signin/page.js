@@ -16,7 +16,7 @@ export default function SignIn() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Sign in to Your Account</h1>
+      <h1 className="text-2xl font-bold mb-4 text-black">Sign in to Your Account</h1>
       {providers &&
         Object.values(providers).map((provider) => (
           <button
