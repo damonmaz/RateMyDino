@@ -9,16 +9,6 @@ DROP DATABASE IF EXISTS rate_my_dino_db;
 CREATE DATABASE rate_my_dino_db;
 USE rate_my_dino_db;
 
--- User Login information
-DROP TABLE IF EXISTS USER;
-CREATE TABLE USER (
-    userID          int PRIMARY KEY AUTO_INCREMENT,
-    email           VARCHAR(255) UNIQUE NOT NULL,
-    pwd             VARCHAR(255) NOT NULL,
-    firstName       VARCHAR(50) NOT NULL,
-    lastName        VARCHAR(50) NOT NULL
-);
-
 -- Professor Information
 DROP TABLE IF EXISTS PROFESSOR;
 CREATE TABLE PROFESSOR (
