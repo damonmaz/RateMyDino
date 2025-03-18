@@ -13,9 +13,8 @@ DELETE FROM USER WHERE email = 'blumbosmeegs@gmail.com';
 -- Selection Test Queries
 SELECT * FROM USER;
 SELECT * FROM PROFESSOR;
-SELECT * FROM COURSE;
 SELECT * FROM REVIEW;
-
+SELECT * FROM PROFESSOR_TAG;
 
 
 -- USER Test Queries
