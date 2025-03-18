@@ -11,12 +11,32 @@ class ProfInfoController:
     def fetch_professor_reviews_for_class(prof_id, course_code):
         return ProfInfoModel.get_professor_reviews_for_class(prof_id, course_code)
     
+    def fetch_professor_tags(prof_id):
+        return ProfInfoModel.get_proffesor_tags(prof_id)
+    
+    def fetch_professor_difficulty_score(prof_id):
+        return ProfInfoModel.get_proffesor_difficulty_score(prof_id)
+    
+    def fetch_professor_overall_score(prof_id):
+        return ProfInfoModel.get_proffesor_overall_score(prof_id)
+    
+    def fetch_courses_by_professor(prof_id):
+        return ProfInfoModel.get_courses_by_professor(prof_id)
+    
 
 if __name__ == "__main__":
-    name = "Peter Tracey"
+    name = "William Holden"
     profID = ProfInfoController.fetch_proffessor_Id(name)
-    print(profID)
+    print("Prof ID: ",profID)
     reviews = ProfInfoController.fetch_all_professor_reviews(profID)
     # print(reviews)
-    reciews_for_class = ProfInfoController.fetch_professor_reviews_for_class(profID, "ECON203")
+    reciews_for_class = ProfInfoController.fetch_professor_reviews_for_class(profID, "ENSC503")
     print(reciews_for_class)
+    tags = ProfInfoController.fetch_professor_tags(profID)
+    print("tags: ",tags)
+    difficulty_score = ProfInfoController.fetch_professor_difficulty_score(profID)
+    print("Difficulty Score: ",difficulty_score)
+    overall_score = ProfInfoController.fetch_professor_overall_score(profID)
+    print("Overall SCore: ", overall_score)
+    courses = ProfInfoController.fetch_courses_by_professor(profID)
+    print(f"Courses taught by Professor {name}: ", courses)

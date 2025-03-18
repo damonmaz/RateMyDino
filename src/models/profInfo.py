@@ -68,4 +68,93 @@ class ProfInfoModel:
         else:
             return None
         
+    def get_proffesor_tags(prof_id):
+        conn = Database.get_connection()
+        cursor = conn.cursor()
+
+        tag_query = """
+        SELECT tag 
+        FROM PROFESSOR_TAG
+        WHERE professorID = %s
+        """
+
+        cursor.execute(tag_query, (prof_id,))
+        tags = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        if tags:
+            tags_text = [f"{tag[0]}" for tag in tags]
+            return tags_text
+        else:
+            return None
+        
+    def get_proffesor_overall_score(prof_id):
+        conn = Database.get_connection()
+        cursor = conn.cursor()
+
+        score_query = """
+        SELECT overallScore 
+        FROM PROFESSOR
+        WHERE professorID = %s
+        """
+
+        cursor.execute(score_query, (prof_id,))
+        score = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+
+        if score:
+            return score[0]
+        else:
+            return None
+        
+    def get_proffesor_difficulty_score(prof_id):
+        conn = Database.get_connection()
+        cursor = conn.cursor()
+
+        score_query = """
+        SELECT difficultyScore 
+        FROM PROFESSOR
+        WHERE professorID = %s
+        """
+
+        cursor.execute(score_query, (prof_id,))
+        score = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+
+        if score:
+            return score[0]
+        else:
+            return None
+        
+    def get_courses_by_professor(prof_id):
+        conn = Database.get_connection()
+        cursor = conn.cursor()
+
+        course_query = """
+        SELECT courseCode 
+        FROM REVIEW
+        WHERE professorID = %s
+        """
+
+        cursor.execute(course_query, (prof_id,))
+        courses = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        if courses:
+            courses_text = [f"{course[0]}" for course in courses]
+            return courses_text
+        else:
+            return None
+        
+    
+
+        
 
