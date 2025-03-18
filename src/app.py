@@ -18,9 +18,11 @@ args = {name: prof_id}
 
 webscraper = WebScraper(args, class_id)
 print (type(webscraper.get_all_ratings()))
+print (webscraper.get_all_ratings())
+print (professor_map)
 
-summary = summarize_reviews(webscraper.get_all_ratings().to_string())
-print(summary)
+# summary = summarize_reviews(webscraper.get_all_ratings().to_string())
+# print(summary)
 
 
 # print(webscraper.get_professor_tags())

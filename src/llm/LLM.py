@@ -1,6 +1,6 @@
 from llm import secret as s
 from openai import OpenAI # type: ignore
-from models.review import ReviewModel
+from models.profInfo import ProfInfoModel
 
 
 client = OpenAI(
@@ -37,8 +37,8 @@ def summarize_reviews(reviews):
     return completion.choices[0].message.content
 
 if __name__ == "__main__":
-    print ("John Doe")
-    sample_reviews = ReviewModel.get_professor_reviews("John Doe")
+    print ("Brian Grant")
+    sample_reviews = ProfInfoModel.get_professor_reviews("Brian Grant")
 
     summary = summarize_reviews(sample_reviews)
     print(summary)
