@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -10,17 +9,11 @@ export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/dashboard");
-    }
-  }, [status, router]);
-
   const handleRedirect = (path) => {
-    if (path !== "/auth/signup") {
-      router.push("/auth/signin");
+    if (!session) {
+      router.push("/auth/signin"); // Redirect to Sign-In if not logged in
     } else {
-      router.push("/auth/signup");
+      router.push(path); // Navigate normally if logged in
     }
   };
 
@@ -40,10 +33,10 @@ export default function Home() {
             Get Started
           </button>
           <button 
-            onClick={() => handleRedirect("/auth/signin")} 
+            onClick={() => handleRedirect("/dashboard")} 
             className="rounded-full border border-black text-black hover:bg-black hover:text-white transition text-sm sm:text-base h-12 px-6 flex items-center justify-center shadow-lg cursor-pointer"
           >
-            Login
+            {session ? "Go to Dashboard" : "Login"}
           </button>
         </div>
       </div>

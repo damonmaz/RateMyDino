@@ -1,15 +1,22 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { useEffect } from "react";
+import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 
 export default function SignIn() {
+  const { data: session, status } = useSession();
   const router = useRouter();
 
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/dashboard");
+    }
+  }, [status, router]);
+
   const handleSignIn = async () => {
-    await signIn("google");
-    router.push("/dashboard"); // Redirect after login
+    await signIn("google", { callbackUrl: "/dashboard" });
   };
 
   return (

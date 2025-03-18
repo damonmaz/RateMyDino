@@ -10,11 +10,7 @@ export default function Navbar() {
 
   // Navigate based on authentication status
   const handleLogoClick = () => {
-    if (session) {
-      router.push("/dashboard");
-    } else {
       router.push("/");
-    }
   };
 
   return (
