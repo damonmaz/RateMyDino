@@ -1,103 +1,76 @@
+"use client";
+
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { FaRocket, FaShieldAlt, FaUsers } from "react-icons/fa";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/dashboard");
+    }
+  }, [status, router]);
+
+  const handleRedirect = (path) => {
+    if (path !== "/auth/signup") {
+      router.push("/auth/signin");
+    } else {
+      router.push("/auth/signup");
+    }
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen bg-white text-black">
+      {/* Hero Section */}
+      <div className="text-center py-20">
+        <h1 className="text-5xl font-bold mb-6">Welcome to RateMyDino 🚀</h1>
+        <p className="max-w-lg mx-auto text-lg text-gray-800 mb-8">
+          Rate dinosaurs, read reviews, and become part of the ultimate dino community.
+        </p>
+        <div className="flex justify-center gap-4">
+          <button 
+            onClick={() => handleRedirect("/auth/signup")} 
+            className="rounded-full bg-green-500 hover:bg-green-600 text-white text-sm sm:text-base h-12 px-6 flex items-center justify-center transition shadow-lg cursor-pointer"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Get Started
+          </button>
+          <button 
+            onClick={() => handleRedirect("/auth/signin")} 
+            className="rounded-full border border-black text-black hover:bg-black hover:text-white transition text-sm sm:text-base h-12 px-6 flex items-center justify-center shadow-lg cursor-pointer"
           >
-            Read our docs
-          </a>
+            Login
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      {/* Features Section */}
+      <div className="flex flex-col items-center justify-center p-8 bg-blue-600 text-gray-100 py-16">
+        <h2 className="text-3xl font-semibold mb-4 text-white">Why Join RateMyDino?</h2>
+        <p className="max-w-2xl text-center mb-8 text-lg text-gray-200">
+          Rate dinosaurs, read reviews, and become part of the ultimate dino community.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl">
+          <FeatureCard icon={<FaRocket />} title="Fast & Fun" description="Rate dinosaurs instantly with an intuitive UI." />
+          <FeatureCard icon={<FaShieldAlt />} title="Trusted Reviews" description="Read honest reviews from real dino lovers." />
+          <FeatureCard icon={<FaUsers />} title="Community" description="Join a network of enthusiasts worldwide." />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FeatureCard({ icon, title, description }) {
+  return (
+    <div className="p-6 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-500 text-white transform transition-transform hover:scale-105 cursor-pointer">
+      <div className="text-3xl mb-3 mx-auto flex justify-center">{icon}</div>
+      <h3 className="text-xl font-semibold mb-2 text-center">{title}</h3>
+      <p className="text-center">{description}</p>
     </div>
   );
 }
