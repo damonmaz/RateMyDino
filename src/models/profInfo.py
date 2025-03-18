@@ -24,7 +24,7 @@ class ProfInfoModel:
             return None
 
 
-    def get_professor_reviews(prof_id):
+    def get_all_professor_reviews(prof_id):
         conn = Database.get_connection()
         cursor = conn.cursor()
 
@@ -43,6 +43,28 @@ class ProfInfoModel:
         if reviews:
             review_texts = [f"{review[0]}: {review[1]}" for review in reviews]
             return review_texts
+        else:
+            return None
+        
+    def get_professor_reviews_for_class(prof_id, course_code):
+        conn = Database.get_connection()
+        cursor = conn.cursor()
+
+        review_by_class_query = """
+        SELECT courseCode, review
+        FROM REVIEW
+        WHERE professorID = %s AND courseCode = %s; 
+        """
+
+        cursor.execute(review_by_class_query, (prof_id, course_code))
+        reviews = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        if reviews:
+            review_text = [f"{review[0]}: {review[1]}" for review in reviews]
+            return review_text
         else:
             return None
         
