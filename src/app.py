@@ -1,26 +1,14 @@
-# from control.AI_control import LLM as llm
-from scraper.webscraping import WebScraper
-from scraper.webscraping import extract_professors
-from control.AI_control.LLM import summarize_reviews
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from routes.professor_routes import professor_bp
+from controllers.profInfo_controller import ProfInfoController
+from controllers.summary_controller import SummaryController
 
-professor_map = extract_professors("scraper/ScrapedSearchPage.htm")
+app = Flask(__name__)
 
-name = input("Name of prof: ")
-class_id = input("Class: ")
-
-prof_id = professor_map[name]
-
-args = {name: prof_id}
-
-webscraper = WebScraper(args, class_id)
-print (type(webscraper.get_all_ratings()))
-
-summary = summarize_reviews(webscraper.get_all_ratings().to_string())
-print(summary)
+# Register Blueprints
+app.register_blueprint(professor_bp)
 
 
-# print(webscraper.get_professor_tags())
-# webscraper.get_all_ratings().to_csv("ratings_output.csv2", index=False)
-# webscraper.get_class_ratings().to_csv("class_ratings_output.csv2", index=False)
-# print("Saved full tables to CSV files.")
-
+if __name__ == '__main__':
+    app.run(debug=True)
