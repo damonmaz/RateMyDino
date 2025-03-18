@@ -2,7 +2,8 @@
 
 import { Titillium_Web } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
-import Navbar from "@/components/Navbar"; // Ensure the Navbar is included
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 // Configure Titillium Web with multiple available weights
@@ -17,8 +18,8 @@ export default function Layout({ children }) {
     <html lang="en" className={titillium.variable}>
       <body>
         <SessionProvider>
-          <Navbar />
           {children}
+          <Footer />
         </SessionProvider>
       </body>
     </html>
