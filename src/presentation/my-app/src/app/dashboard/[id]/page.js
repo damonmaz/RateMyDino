@@ -47,7 +47,7 @@ export default function ProfessorPage({ params }) {
         <div className="mt-6">
           <h2 className="text-xl font-semibold">Reviews</h2>
           <div className="space-y-4 mt-2">
-            {professor.reviews.map((review, index) => (
+            {professor.reviews?.map((review, index) => (
               <div key={index} className="p-4 bg-gray-100 rounded-lg shadow">
                 <p>{review}</p>
               </div>

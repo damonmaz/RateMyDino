@@ -27,7 +27,7 @@ export default function Dashboard() {
 
   const handleSearch = async () => {
     if (!searchQuery) return;
-    
+
     try {
       const response = await fetch(`/api/professors?search=${searchQuery}`);
       const data = await response.json();
@@ -71,7 +71,7 @@ export default function Dashboard() {
               className="p-4 bg-gray-100 rounded-lg shadow cursor-pointer hover:bg-gray-200 transition"
             >
               <h2 className="text-xl font-semibold">{prof.name}</h2>
-              <p className="text-gray-600">{prof.description}</p>
+              <p className="text-gray-600">Click to view details</p>
             </div>
           ))}
         </div>
