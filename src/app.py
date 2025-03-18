@@ -1,32 +1,79 @@
-# from control.AI_control import LLM as llm
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from controllers.profInfo_controller import ProfInfoController
+from controllers.summary_controller import SummaryController
 
-# THIS FILE IS FOR TESTING PURPOSES RIGHT NOW
-# IT WILL BE RESPOSIBLE FOR STARTING THE FLASK SERVER
+app = Flask(__name__)
 
-from scraper.webscraping import WebScraper
-from scraper.webscraping import extract_professors
-from llm.LLM import summarize_reviews
+# GET Prof Courses
+@app.route('/professor/<prof_name>/courses', methods=['GET'])
+def get_courses(prof_name):
+    courses = ProfInfoController.fetch_courses_by_professor(prof_name)
+    if courses is None:  
+        return jsonify({"error": "Professor not found"})
+    else:
+        return jsonify({
+        "Courses": courses
+    })
 
-professor_map = extract_professors("scraper/ScrapedSearchPage.htm")
+# GET Prof Tags
+@app.route('/professor/<prof_name>/tags', methods = ['GET'])
+def prof_tags(prof_name):
+    tags = ProfInfoController.fetch_professor_tags(prof_name)
+    if tags is None:
+        return jsonify({"error": "Professor not found"})
+    else:
+        return jsonify({
+            "Tags": tags
+        })
 
-name = input("Name of prof: ")
-class_id = input("Class: ")
+# GET Prof Difficulty Score
+@app.route('/professor/<prof_name>/DifficultyScore', methods = ['GET'])
+def prof_difficulty_score(prof_name):
+    difficulty_score = ProfInfoController.fetch_professor_difficulty_score(prof_name)
+    if difficulty_score is None:
+        return jsonify({"error": "Professor not found"})
+    else:
+        return jsonify({
+            "Difficulty Score": difficulty_score
+        })
 
-prof_id = professor_map[name]
+# GET Prof Overall Score
+@app.route('/professor/<prof_name>/OverallScore', methods = ['GET'])
+def prof_Overall_score(prof_name):
+    overall_score = ProfInfoController.fetch_professor_overall_score(prof_name)
+    if overall_score is None:
+         return jsonify({"error": "Professor not found"})
+    else:
+        return jsonify({
+            "Overall Score": overall_score
+        })
 
-args = {name: prof_id}
+ 
+# GET sumerized reviews for specific Class by Prof
+@app.route('/professor/<prof_name>/course/<course_code>/summary', methods=['GET'])
+def summarize_class_reviews(prof_name, course_code):
+    summary = SummaryController.fetch_summarized_professor_reviews_for_class(prof_name, course_code)
+    if summary is None:
+        return jsonify({"error": "Professor not found"})
+    else:
+        return jsonify({
+            "Summary": summary
+        })
+    
+# GET all sumerized reviews for professor
+@app.route('/professor/<prof_name>/summary', methods=['GET'])
+def summarize_all_classes(prof_name):
+    summary = SummaryController.fetch_all_summarized_reviews_for_proff(prof_name)
+    if summary is None:
+        return jsonify({"error": "Professor not found"})
+    else:
+        return jsonify({
+            "Summary": summary
+        })
+    
+        
 
-webscraper = WebScraper(args, class_id)
-print (type(webscraper.get_all_ratings()))
-print (webscraper.get_all_ratings())
-print (professor_map)
 
-# summary = summarize_reviews(webscraper.get_all_ratings().to_string())
-# print(summary)
-
-
-# print(webscraper.get_professor_tags())
-# webscraper.get_all_ratings().to_csv("ratings_output.csv2", index=False)
-# webscraper.get_class_ratings().to_csv("class_ratings_output.csv2", index=False)
-# print("Saved full tables to CSV files.")
-
+if __name__ == '__main__':
+    app.run(debug=True)

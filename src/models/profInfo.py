@@ -2,7 +2,7 @@ from models.Database import Database
 
 class ProfInfoModel: 
 
-    def get_proffessor_ID(prof_name):
+    def get_professor_ID(prof_name):
         conn = Database.get_connection()
         cursor = conn.cursor()
 
