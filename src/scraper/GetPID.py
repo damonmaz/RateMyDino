@@ -1,9 +1,22 @@
 from bs4 import BeautifulSoup
 import pandas as pd
 
-professorsExtracted = pd.DataFrame()
 
 def extract_professors(filename):
+    """
+    Extracts professor names and their corresponding IDs from a saved HTML file of RateMyProfessors.
+
+    Args:
+        filename (str): The path to the HTML file containing professor listings.
+
+    Returns:
+        dict: A dictionary where keys are professor names (str) and values are professor IDs (str).
+    
+    Raises:
+        FileNotFoundError: If the specified file does not exist.
+        UnicodeDecodeError: If the file contains characters that cannot be decoded using UTF-8.
+    """
+
     with open(filename, "r", encoding="utf-8") as file:
         soup = BeautifulSoup(file, "html.parser")
     
@@ -22,7 +35,7 @@ def extract_professors(filename):
                 for name_info in card_info.find_all("div", class_="CardName__StyledCardName-sc-1gyrgim-0 cJdVEK"):
                     name = name_info.text
 
-            professors[name] = pID # add entry to dict
+            professors[pID] = name # add entry to dict
             
     return professors
 
