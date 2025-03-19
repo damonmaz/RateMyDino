@@ -90,13 +90,13 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center flex-grow p-12 bg-blue-600 text-gray-100 py-24">
         <h2 className="text-4xl font-semibold mb-6 text-white">Why Join RateMyDino?</h2>
         <p className="max-w-3xl text-center mb-12 text-xl text-gray-200">
-          Rate dinosaurs, read reviews, and become part of the ultimate dino community.
+          Rate professors, read reviews, and become part of the ultimate dino community.
         </p>
-
+    
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 max-w-5xl">
-          <FeatureCard icon={<FaRocket />} title="Fast & Fun" description="Rate dinosaurs instantly with an intuitive UI." />
-          <FeatureCard icon={<FaShieldAlt />} title="Trusted Reviews" description="Read honest reviews from real dino lovers." />
-          <FeatureCard icon={<FaUsers />} title="Community" description="Join a network of enthusiasts worldwide." />
+          <FeatureCard icon={<FaRocket />} title="Fast & Fun" description="Rate professors instantly with an intuitive UI." />
+          <FeatureCard icon={<FaShieldAlt />} title="Trusted Reviews" description="Read AI generated reviews created from real UofC students." />
+          <FeatureCard icon={<FaUsers />} title="Community" description="Join a network of enthusiasts from around the university." />
         </div>
       </div>
 
