@@ -65,6 +65,10 @@ export default function Dashboard() {
     }
   };
 
+  const handleProfessorClick = (prof) => {
+    router.push(`/dashboard/${prof.name}`);
+  };
+
   if (status === "loading") return <Loading />;
 
   return (
@@ -145,7 +149,7 @@ export default function Dashboard() {
             {professors.map((prof, index) => (
               <div
                 key={prof.id}
-                onClick={() => router.push(`/dashboard/${prof.id}`)}
+                onClick={() => handleProfessorClick(prof)}
                 className={`p-4 bg-gray-100 border-2 border-gray-500 rounded-lg shadow cursor-pointer hover:bg-gray-200 transition transform ${
                   fadeInStep >= 4 ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
                 } delay-${index * 200}`}

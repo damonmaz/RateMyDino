@@ -1,21 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Loading from "@/app/loading";
 
-export default function ProfessorPage({ params }) {
-  const { id } = params; // Get Professor ID from URL
+export default function ProfessorPage() {
+  const { id: profName } = useParams();
   const router = useRouter();
   const [professor, setProfessor] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProfessor = async () => {
+      if (!profName) {
+        setError("Professor not found");
+        return;
+      }
+
       try {
-        // Fetch Professor Data from Flask API
-        const response = await fetch(`http://127.0.0.1:5000/professor/${id}/summary`);
+        const response = await fetch(`http://127.0.0.1:5000/professor/${encodeURIComponent(profName)}/summary`);
         if (!response.ok) {
           throw new Error("Professor not found");
         }
@@ -27,14 +31,13 @@ export default function ProfessorPage({ params }) {
     };
 
     fetchProfessor();
-  }, [id]);
+  }, [profName]);
 
   if (!professor && !error) return <Loading />;
 
   return (
     <div className="bg-white text-black min-h-screen">
       <Navbar />
-
       <div className="max-w-4xl mx-auto p-6">
         {error ? (
           <h1 className="text-3xl font-bold text-red-500">{error}</h1>
@@ -43,7 +46,6 @@ export default function ProfessorPage({ params }) {
             <h1 className="text-4xl font-bold mb-2">{professor.name}</h1>
             <p className="text-gray-700 text-lg mb-4">{professor.description}</p>
 
-            {/* Overall Rating Bar */}
             <div className="mt-6">
               <h2 className="text-xl font-semibold">Overall Rating</h2>
               <div className="w-full bg-gray-300 rounded-full h-6 mt-2">
@@ -55,7 +57,6 @@ export default function ProfessorPage({ params }) {
               <p className="mt-2 text-lg font-semibold">{professor.score} / 5</p>
             </div>
 
-            {/* Courses Section */}
             <div className="mt-6">
               <h2 className="text-xl font-semibold">Courses Taught</h2>
               <ul className="list-disc list-inside mt-2">
@@ -65,7 +66,6 @@ export default function ProfessorPage({ params }) {
               </ul>
             </div>
 
-            {/* Tags Section */}
             <div className="mt-6">
               <h2 className="text-xl font-semibold">Teaching Tags</h2>
               <div className="flex flex-wrap gap-2 mt-2">
@@ -77,7 +77,6 @@ export default function ProfessorPage({ params }) {
               </div>
             </div>
 
-            {/* Reviews Section */}
             <div className="mt-6">
               <h2 className="text-xl font-semibold">Reviews</h2>
               <div className="space-y-4 mt-2">
