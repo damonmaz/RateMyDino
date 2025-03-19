@@ -18,6 +18,7 @@ export default function Layout({ children }) {
     <html lang="en" className={titillium.variable}>
       <body>
         <SessionProvider>
+          
           {children}
           <Footer />
         </SessionProvider>

@@ -4,6 +4,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import Loading from "../loading";
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
@@ -37,12 +38,13 @@ export default function Dashboard() {
     }
   };
 
-  if (status === "loading") return <p>Loading...</p>;
+  if (status === "loading") return <Loading />;
 
   return (
     <div className="bg-white text-black min-h-screen">
       <Navbar />
-      <div className="max-w-4xl mx-auto p-6">
+
+      <div className="max-w-4xl mx-auto pt-20 p-6">
         <h1 className="text-2xl font-bold text-center mb-6">Welcome, {userName}!</h1>
 
         {/* Search Bar */}
