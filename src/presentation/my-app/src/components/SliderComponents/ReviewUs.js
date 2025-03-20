@@ -1,13 +1,14 @@
 "use client";
 
 export default function ReviewUs() {
+  const email = "jaisumerss@gmail.com";
   const emailSubject = encodeURIComponent("User Review For RateMyDino!");
   const emailBody = encodeURIComponent(
     "Hey! Here below is how I found RateMyDinos, helpful or unhelpful:"
   );
 
   const handleClick = () => {
-    window.location.href = `mailto:?subject=${emailSubject}&body=${emailBody}`;
+    window.location.href = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
   };
 
   return (

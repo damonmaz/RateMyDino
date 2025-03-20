@@ -17,16 +17,13 @@ export default function Footer() {
           <button onClick={() => router.push("/about")} className="hover:underline cursor-pointer">
             About Us
           </button>
-          <button onClick={() => router.push("/contact")} className="hover:underline cursor-pointer">
+          <button onClick={() => router.push("/about")} className="hover:underline cursor-pointer">
             Contact Us
           </button>
           <button onClick={() => router.push("/dashboard")} className="hover:underline cursor-pointer">
             Dashboard
           </button>
-          <button onClick={() => router.push("/reviews")} className="hover:underline cursor-pointer">
-            Review Us
-          </button>
-          <button onClick={() => router.push("/auth/signup")} className="hover:underline cursor-pointer">
+          <button onClick={() => router.push("/auth/signin")} className="hover:underline cursor-pointer">
             Sign Up
           </button>
           <button onClick={() => router.push("/auth/signin")} className="hover:underline cursor-pointer">

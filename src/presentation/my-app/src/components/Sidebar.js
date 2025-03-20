@@ -67,7 +67,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           <button onClick={() => handleNavigation("top")} className="text-white hover:text-[#FFA62B] text-lg transition cursor-pointer">
             To the Top
           </button>
-          <button onClick={() => handleNavigation("/contact")} className="text-white hover:text-[#FFA62B] text-lg transition cursor-pointer">
+          <button onClick={() => handleNavigation("/about")} className="text-white hover:text-[#FFA62B] text-lg transition cursor-pointer">
             Contact Page
           </button>
 
