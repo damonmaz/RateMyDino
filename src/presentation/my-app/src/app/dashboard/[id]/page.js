@@ -16,9 +16,8 @@ export default function ProfessorPage() {
   const [fadeInStep, setFadeInStep] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [professorSummary, setProfessorSummary] = useState(null);
-
+  const [overallScore, setOverallScore] = useState(null);
   const [professorCourses, setProfessorCourses] = useState([]);
-
   const profName = decodeURIComponent(rawProfName).replace(/[^a-zA-Z\s]/g, "").trim();
 
   const coursesRef = useRef([]);
@@ -34,28 +33,30 @@ export default function ProfessorPage() {
           return;
         }
 
-        const [summaryRes, coursesRes, tagsRes, difficultyRes] = await Promise.all([
+        const [summaryRes, coursesRes, tagsRes, difficultyRes, overallScoreRes] = await Promise.all([
           fetch(`http://127.0.0.1:5000/professor/${encodeURIComponent(profName)}/summary`),
           fetch(`http://127.0.0.1:5000/professor/${encodeURIComponent(profName)}/courses`),
           fetch(`http://127.0.0.1:5000/professor/${encodeURIComponent(profName)}/tags`),
           fetch(`http://127.0.0.1:5000/professor/${encodeURIComponent(profName)}/DifficultyScore`),
+          fetch(`http://127.0.0.1:5000/professor/${encodeURIComponent(profName)}/OverallScore`)
         ]);
 
-        if (![summaryRes, coursesRes, tagsRes, difficultyRes].every((res) => res.ok)) {
+        if (![summaryRes, coursesRes, tagsRes, difficultyRes, overallScoreRes].every((res) => res.ok)) {
           throw new Error("Failed to fetch professor data");
         }
 
-        const [summaryData, coursesData, tagsData, difficultyData] = await Promise.all([
+        const [summaryData, coursesData, tagsData, difficultyData, overallScoreData] = await Promise.all([
           summaryRes.json(),
           coursesRes.json(),
           tagsRes.json(),
           difficultyRes.json(),
+          overallScoreRes.json()
         ]);
 
         setProfessorSummary(summaryData.Summary || "No summary available.");
+        setOverallScore(overallScoreData["Overall Score"] || "N/A");
 
         const uniqueCourses = Array.isArray(coursesData.Courses) ? [...new Set(coursesData.Courses)] : [];
-
         coursesRef.current = uniqueCourses;
         setProfessorCourses(uniqueCourses);
         tagsRef.current = tagsData.Tags || [];
@@ -66,7 +67,7 @@ export default function ProfessorPage() {
           setTimeout(() => setFadeInStep(1), delay),
           setTimeout(() => setFadeInStep(2), delay + 300),
           setTimeout(() => setFadeInStep(3), delay + 600),
-          setTimeout(() => setFadeInStep(4), delay + 900),
+          setTimeout(() => setFadeInStep(4), delay + 900)
         ];
 
         return () => fadeSteps.forEach(clearTimeout);
@@ -124,7 +125,14 @@ export default function ProfessorPage() {
                 </div>
 
                 <div className={`mt-4 transition-all duration-700 ${fadeInStep >= 3 ? "opacity-100" : "opacity-0"}`}>
-                  <h2 className="text-lg font-semibold">Difficulty Score:</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">Overall Score:</h2>
+                  <p className="text-4xl font-bold text-blue-600">
+                    {overallScore} / 5
+                  </p>
+                </div>
+
+                <div className={`mt-2 transition-all duration-700 ${fadeInStep >= 3 ? "opacity-100" : "opacity-0"}`}>
+                  <h2 className="text-lg font-semibold text-gray-800">Difficulty Score:</h2>
                   <p className="text-xl font-semibold text-gray-800">
                     {difficultyRef.current} / 5
                   </p>
