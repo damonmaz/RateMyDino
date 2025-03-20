@@ -2,6 +2,7 @@
 
 import { Titillium_Web } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
+import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -15,11 +16,11 @@ const titillium = Titillium_Web({
 export default function Layout({ children }) {
   return (
     <html lang="en" className={titillium.variable}>
-      <head>
+      <Head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <title>RateMyDino</title>
         <meta name="description" content="AI generated Reviews for University of Calgary Professors" />
-      </head>
+      </Head>
       <body>
         <SessionProvider>
           
