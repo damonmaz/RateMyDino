@@ -15,19 +15,11 @@ class LlmReviews:
         prompt = (
             "You are an AI assistant that summarizes professor reviews for students. "
             "You will be given list of reviews for some classes"
-            "Summarize the student reviews for each course based on the provided feedback"
+            "Summarize the student reviews based on the provided feedback"
             "The input consists of course names and student comments"
             "Group comments by course and provide a concise summary capturing common themes such as teaching quality, course structure, exam difficulty, and any notable strengths or weaknesses. Maintain an objective tone."
-            "Arrange your output like this"
-            "Course:"
-            "Teaching Quality"
-            "Course Structure"
-            "Exam and Quiz difficulty"
-            "Notable Strenghts and Weaknesses"
-            "\n"
-            "Student Reviews:\n"
         ) + "\n".join(reviews) + "\n" \
-            "Provide a summary with insights on the professor’s teaching style and student feedback."
+            "Provide a summary with insights on the professor’s teaching style and student feedback. Make sure it does not have any special characters, and only in a paragraph."
 
         completion = LlmReviews.client.chat.completions.create(
             model="gpt-4o-mini",
@@ -48,7 +40,7 @@ class LlmReviews:
             "Summarize the student reviews for course based on the provided feedback"
             "The input consists of course name and student comments"
             "provide a concise summary capturing common themes such as teaching quality, course structure, exam difficulty, and any notable strengths or weaknesses. Maintain an objective tone."
-            "Arrange your output like this"
+            "Arrange your output like this and give it in a json format not a markdown format"
             "Course:"
             "Teaching Quality"
             "Course Structure"
