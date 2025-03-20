@@ -14,7 +14,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const isDashboard = pathname.startsWith("/dashboard");
 
-  // Sidebar state
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
@@ -38,7 +37,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Placeholder to prevent content shift when navbar becomes sticky */}
       {!isDashboard && isSticky && <div className="h-16 bg-gradient-to-b from-black to-transparent"></div>}
 
       <nav
@@ -46,18 +44,15 @@ export default function Navbar() {
         className={`bg-[#001f3f] text-white p-4 flex justify-between items-center w-full shadow-lg z-50 transition-all duration-300
         ${isDashboard ? "fixed top-0" : isSticky ? "fixed top-0" : "relative"}`}
       >
-        {/* Sidebar Toggle Button */}
         <button onClick={() => setIsSidebarOpen(true)} className="text-white text-2xl p-2 cursor-pointer">
           <FaBars />
         </button>
 
-        {/* Logo + Name Link */}
         <button onClick={() => router.push("/")} className="flex items-center space-x-2 cursor-pointer">
           <Image src="/Logo.png" alt="RateMyDino Logo" width={50} height={50} />
           <span className="text-lg font-semibold tracking-wide">RateMyDino</span>
         </button>
 
-        {/* Sign-In / Sign-Out Button */}
         <div>
           {status === "loading" ? (
             <Loading />
@@ -73,7 +68,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Sidebar Component */}
       <Sidebar isOpen={isSidebarOpen} closeSidebar={() => setIsSidebarOpen(false)} />
     </>
   );

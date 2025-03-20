@@ -43,7 +43,6 @@ export default function Sidebar({ isOpen, closeSidebar }) {
 
   return (
     <>
-      {/* Darkened Background */}
       <div
         className={`fixed inset-0 bg-black transition-opacity duration-300 
           ${isOpen ? "opacity-50 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
@@ -59,7 +58,6 @@ export default function Sidebar({ isOpen, closeSidebar }) {
           <h2 className="text-white text-xl font-bold mb-4">Menu</h2>
           <hr className="border-t border-gray-400 mb-2" />
 
-          {/* Sidebar Links */}
           <button onClick={() => handleNavigation("/dashboard")} className="text-white hover:text-[#FFA62B] text-lg transition cursor-pointer">
             Dashboard
           </button>
@@ -73,7 +71,6 @@ export default function Sidebar({ isOpen, closeSidebar }) {
             Contact Page
           </button>
 
-          {/* Back Option */}
           <button onClick={closeSidebar} className="text-gray-300 hover:text-white mt-6 text-lg transition cursor-pointer">
             Back
           </button>

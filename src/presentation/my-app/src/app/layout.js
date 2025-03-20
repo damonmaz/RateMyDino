@@ -6,7 +6,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
-// Configure Titillium Web with multiple available weights
 const titillium = Titillium_Web({
   subsets: ["latin"],
   weight: ["200", "300", "400", "600", "700"],

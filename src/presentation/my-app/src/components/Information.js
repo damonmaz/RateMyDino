@@ -41,7 +41,6 @@ export default function Information() {
           follow these simple steps:
         </p>
 
-        {/* Step-by-Step Guide with React Icon Arrows */}
         <ul className="space-y-4">
           <li className="flex items-center">
             <FaArrowRight className="text-white text-xl mr-3" />

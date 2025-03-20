@@ -27,7 +27,7 @@ export default function HomeSlider() {
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 } // 30% visible to trigger
+      { threshold: 0.3 }
     );
 
     if (sliderRef.current) {
@@ -43,21 +43,17 @@ export default function HomeSlider() {
 
   return (
     <div ref={sliderRef} className="flex flex-col items-center justify-center py-16 bg-gray-900">
-      {/* Dark Grey Box with Gradient Border - Animates In */}
       <div className={`relative w-11/12 max-w-6xl rounded-2xl shadow-lg transition-transform duration-1000 ease-in-out 
         ${isVisible ? "animate-fadeInUp opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
 
-        {/* Gradient Border */}
         <div className="absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-r from-red-500 to-orange-500"></div>
 
-        {/* Inner Dark Grey Box */}
         <div className="relative bg-gray-700 rounded-2xl p-8 m-[2px]">
           <h2 className="text-4xl font-semibold text-white mb-6 text-center">Get Involved</h2>
           <p className="text-lg text-gray-300 mb-6 max-w-2xl text-center mx-auto">
             Explore different ways to engage with RateMyDino!
           </p>
 
-          {/* Slider Container */}
           <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-700 rounded-lg">
             <div className="flex space-x-6 p-4">
               {slides.map((slide, index) => (

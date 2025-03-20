@@ -14,8 +14,7 @@ export const authOptions = {
         email: { label: "Email", type: "email", placeholder: "you@example.com" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
-        // Dummy authentication (Replace with DB check)
+      async authorize(credentials) { //dummy admin
         if (credentials.email === "admin@example.com" && credentials.password === "password") {
           return { id: "1", name: "Admin", email: "admin@example.com" };
         }

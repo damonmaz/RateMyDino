@@ -1,27 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import { FaArrowLeft } from "react-icons/fa";
 import Loading from "@/app/loading";
 
-export default function CoursePage() {
-  const params = useParams();
-
-  const rawProfName = params.id || "";
-  const courseId = params.courseID || "";
-
+export default function CourseDetails({ profName, courseId, onClose }) {
   const [courseDetails, setCourseDetails] = useState(null);
   const [error, setError] = useState(null);
   const [fadeIn, setFadeIn] = useState(false);
-
-  const profName = decodeURIComponent(rawProfName).replace(/[^a-zA-Z\s]/g, "").trim();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!profName || !courseId) {
       setError("Invalid professor or course.");
+      setLoading(false);
       return;
     }
+
+    document.body.classList.add("overflow-hidden");
 
     const fetchCourseDetails = async () => {
       try {
@@ -38,21 +34,37 @@ export default function CoursePage() {
         }
 
         setCourseDetails(JSON.parse(data.Summary));
-        setFadeIn(true);
+        setTimeout(() => setFadeIn(true), 100);
       } catch (error) {
         setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchCourseDetails();
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
   }, [profName, courseId]);
 
-  if (!courseDetails && !error) return <Loading />;
+  if (loading) return <Loading />;
 
   return (
-    <div className="bg-white text-black min-h-screen">
-      <Navbar />
-      <div className="max-w-4xl mx-auto p-6 pt-28">
+    <div className="fixed inset-0 bg-white z-50 p-6 pt-[4rem] transition-all duration-700 flex flex-col overflow-y-auto max-h-screen">
+      <button
+        onClick={onClose}
+        className="sticky top-0 left-0 flex items-center gap-2 bg-gray-200 px-4 py-2 rounded-md hover:bg-gray-300 transition cursor-pointer z-50"
+      >
+        <FaArrowLeft className="text-lg" /> Back
+      </button>
+
+      <div
+        className={`mt-6 transition-all duration-700 ${
+          fadeIn ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+        }`}
+      >
         {error ? (
           <h1 className="text-3xl font-bold text-red-500">{error}</h1>
         ) : (
@@ -63,13 +75,7 @@ export default function CoursePage() {
               {Object.entries(courseDetails)
                 .filter(([key]) => key !== "Course")
                 .map(([title, content], index) => (
-                  <div
-                    key={index}
-                    className={`bg-gray-100 p-6 rounded-lg shadow-lg transition-all duration-700 ${
-                      fadeIn ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-                    }`}
-                    style={{ transitionDelay: `${index * 200}ms` }}
-                  >
+                  <div key={index} className="bg-gray-100 p-6 rounded-lg shadow-lg">
                     <h2 className="text-2xl font-semibold border-b-2 pb-2 mb-4">{title}</h2>
                     <p className="text-gray-700">{content}</p>
                   </div>
