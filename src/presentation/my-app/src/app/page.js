@@ -9,6 +9,7 @@ import Information from "@/components/Information";
 import FeatureCard from "@/components/FeatureCard";
 import Slider from "@/components/SliderComponents/HomeSlider";
 import { FaRocket, FaShieldAlt, FaUsers } from "react-icons/fa";
+import Loading from "./loading";
 
 export default function Home() {
   const { data: session } = useSession();
