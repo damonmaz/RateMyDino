@@ -1,4 +1,4 @@
-"use client"; // Mark this as a Client Component
+"use client";
 
 import { Titillium_Web } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
@@ -15,6 +15,11 @@ const titillium = Titillium_Web({
 export default function Layout({ children }) {
   return (
     <html lang="en" className={titillium.variable}>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <title>RateMyDino</title>
+        <meta name="description" content="AI generated Reviews for University of Calgary Professors" />
+      </head>
       <body>
         <SessionProvider>
           
