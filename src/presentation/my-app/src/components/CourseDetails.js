@@ -21,7 +21,7 @@ export default function CourseDetails({ profName, courseId, onClose }) {
 
     const fetchCourseDetails = async () => {
       try {
-        const apiUrl = `http://127.0.0.1:5000/professor/${encodeURIComponent(profName)}/course/${encodeURIComponent(courseId.toUpperCase())}/summary`;
+        const apiUrl = `https://render-ratemydino-726348.onrender.com/professor/${encodeURIComponent(profName)}/course/${encodeURIComponent(courseId.toUpperCase())}/summary`;
 
         const response = await fetch(apiUrl);
         if (!response.ok) {
