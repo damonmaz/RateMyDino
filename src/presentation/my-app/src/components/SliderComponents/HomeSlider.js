@@ -11,7 +11,7 @@ import DashboardLink from "./DashboardLink";
 const slides = [
   { id: "share", component: <ShareUs />, image: "/SliderImages/ShareUs.jpg", link: "mailto:?subject=Check%20out%20RateMyDino!&body=Hey!%20Check%20out%20this%20site%20https://ratemydino.com" },
   { id: "review", component: <ReviewUs />, image: "/SliderImages/review.jpg", link: "mailto:jaisumerss@gmail.com?subject=User%20Review%20For%20RateMyDino%21&body=Hey%21%20Here%20below%20is%20how%20I%20found%20RateMyDinos%2C%20helpful%20or%20unhelpful%3A" },
-  { id: "join", component: <JoinUs />, image: "/SliderImages/SignUp.webp", link: "/auth/signup" },
+  { id: "join", component: <JoinUs />, image: "/SliderImages/SignUp.webp", link: "/auth/signin" },
   { id: "contact", component: <ContactUs />, image: "/SliderImages/ContactUs.jpg", link: "/about" },
   { id: "dashboard", component: <DashboardLink />, image: "/SliderImages/Dashboard.jpg", link: "/dashboard" },
 ];
