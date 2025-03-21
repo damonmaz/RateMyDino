@@ -1,15 +1,19 @@
+import os
 import mysql.connector  # type: ignore
-from models import secret_db as sdb
+dbhost = os.environ.get("db_host")
+dbuser = os.environ.get("db_user")
+dbpwd = os.environ.get("db_password")
+dbname = os.environ.get("db_name")
 
 class Database:
 
     def get_connection():
         try:
             conn = mysql.connector.connect(
-                host=sdb.db_host,
-                user=sdb.db_user,
-                password=sdb.db_password,
-                database=sdb.db_name
+                host=dbhost,
+                user=dbuser,
+                password=dbpwd,
+                database=dbname
             )
             if conn.is_connected():
                 return conn

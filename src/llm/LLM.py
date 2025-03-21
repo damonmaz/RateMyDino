@@ -1,11 +1,10 @@
-from llm import secret as s
+import os
 from openai import OpenAI # type: ignore
 from models.profInfo import ProfInfoModel
 
-
 class LlmReviews:
     client = OpenAI(
-    api_key=s.OPENAI_KEY
+    api_key = os.environ.get("OPENAI_KEY")
     )
 
     def summarize_all_classes_reviews(reviews):
