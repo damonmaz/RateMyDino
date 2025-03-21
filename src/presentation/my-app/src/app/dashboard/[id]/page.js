@@ -34,11 +34,11 @@ export default function ProfessorPage() {
         }
 
         const [summaryRes, coursesRes, tagsRes, difficultyRes, overallScoreRes] = await Promise.all([
-          fetch(`http://127.0.0.1:5000/professor/${encodeURIComponent(profName)}/summary`),
-          fetch(`http://127.0.0.1:5000/professor/${encodeURIComponent(profName)}/courses`),
-          fetch(`http://127.0.0.1:5000/professor/${encodeURIComponent(profName)}/tags`),
-          fetch(`http://127.0.0.1:5000/professor/${encodeURIComponent(profName)}/DifficultyScore`),
-          fetch(`http://127.0.0.1:5000/professor/${encodeURIComponent(profName)}/OverallScore`)
+          fetch(`https://render-ratemydino-726348.onrender.com/professor/${encodeURIComponent(profName)}/summary`),
+          fetch(`https://render-ratemydino-726348.onrender.com/professor/${encodeURIComponent(profName)}/courses`),
+          fetch(`https://render-ratemydino-726348.onrender.com/professor/${encodeURIComponent(profName)}/tags`),
+          fetch(`https://render-ratemydino-726348.onrender.com/professor/${encodeURIComponent(profName)}/DifficultyScore`),
+          fetch(`https://render-ratemydino-726348.onrender.com/professor/${encodeURIComponent(profName)}/OverallScore`)
         ]);
 
         if (![summaryRes, coursesRes, tagsRes, difficultyRes, overallScoreRes].every((res) => res.ok)) {
