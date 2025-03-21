@@ -53,13 +53,13 @@ export default function Information() {
           <li className="flex items-center">
             <FaArrowRight className="text-white mr-3" style={{ fontSize: "1.5vh" }} />
             <span style={{ fontSize: "1.5vh" }}>
-              🔍 <b>Search</b>: Type in a professor's name to find reviews.
+              🔍 <b>Search</b>: Type in a professor&apos;s name to find reviews.
             </span>
           </li>
           <li className="flex items-center">
             <FaArrowRight className="text-white mr-3" style={{ fontSize: "1.5vh" }} />
             <span style={{ fontSize: "1.5vh" }}>
-              🤖 <b>AI Summary</b>: Get an instant, AI-generated overview of the professor's ratings, teaching style, and tips.
+              🤖 <b>AI Summary</b>: Get an instant, AI-generated overview of the professor&apos;s ratings, teaching style, and tips.
             </span>
           </li>
         </ul>

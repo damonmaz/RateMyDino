@@ -110,7 +110,7 @@ export default function AboutUs() {
           <h2 className="text-2xl font-semibold mb-3">Connect With Us</h2>
           <p className="text-gray-300">
             Want to <b>learn more</b> about our projects and <b>explore opportunities</b> in software development?
-            Let's <b>connect and collaborate</b> to make innovative ideas come to life!
+            Let&apos;s <b>connect and collaborate</b> to make innovative ideas come to life!
           </p>
         </div>
       </div>

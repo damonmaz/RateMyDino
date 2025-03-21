@@ -31,7 +31,7 @@ export default function SignIn() {
             Sign in with Google
           </button>
           <p className="text-center mt-4 text-gray-700">
-            Don't have an account?
+            Don&apos;t have an account?
             This is a protected website, so please create a gmail. Thank you for your patience!
           </p>
         </div>
