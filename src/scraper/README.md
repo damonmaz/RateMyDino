@@ -1,1 +1,1 @@
-This will be the layer for the scraper
+Run populate_db to fill DB with entries from profs in professor_map.json

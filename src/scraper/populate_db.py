@@ -1,5 +1,5 @@
 import json
-from database.DataBaseConnector import get_db_connection
+from models.Database import get_connection
 from scraper.webscraping import WebScraper
 import pandas as pd
 
@@ -15,7 +15,7 @@ def populate_db():
     with open(FILENAME_JSON, "r") as file:
         professor_map = json.load(file)
         
-    conn = get_db_connection()
+    conn = get_connection()
     cursor = conn.cursor()
 
     start_processing = False
@@ -81,8 +81,6 @@ def populate_db():
         conn.commit()
         
         print(f"{prof_id}: {name} has been added to the DB")
-        # print(reviews)
-        # print(tags)
     
     cursor.close()
     conn.close()

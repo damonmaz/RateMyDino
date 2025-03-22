@@ -17,5 +17,4 @@ class SummaryController:
 if __name__ == "__main__":
     name = "William Holden"
     course_code = "ENSC503"
-    # print(SummaryController.fetch_all_summarized_reviews(name))
     print(SummaryController.fetch_summarized_professor_reviews_for_class(name, course_code))

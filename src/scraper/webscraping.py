@@ -183,15 +183,19 @@ class WebScraper:
 
 if __name__ == "__main__":
 
+    DO_JSON = True
+        
     professor_map = extract_professors("ScrapedSearchPage.htm")
-    # to_json(professor_map)
+    
+    if DO_JSON:
+        to_json(professor_map)
+    else:
+        name = input("Name of prof: ")
+        class_id = input("Class: ")
 
-    name = input("Name of prof: ")
-    class_id = input("Class: ")
+        prof_id = list(professor_map.keys())[list(professor_map.values()).index(name)]
 
-    prof_id = list(professor_map.keys())[list(professor_map.values()).index(name)]
+        args = {prof_id: name}
 
-    args = {prof_id: name}
-
-    webscraper = WebScraper(args, class_id)
-    print(webscraper.get_all_ratings())
+        webscraper = WebScraper(args, class_id)
+        print(webscraper.get_all_ratings())
