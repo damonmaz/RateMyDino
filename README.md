@@ -17,6 +17,8 @@ Set the current working directory to src/presentation/my-app/
 Then, run the development server:
 
 ```bash
+npm install
+#and then
 npm run dev
 # or
 yarn dev
