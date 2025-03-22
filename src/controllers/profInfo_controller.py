@@ -35,7 +35,6 @@ if __name__ == "__main__":
     profID = ProfInfoController.fetch_professor_Id(name)
     print("Prof ID: ",profID)
     reviews = ProfInfoController.fetch_all_professor_reviews(name)
-    # print(reviews)
     reviews_for_class = ProfInfoController.fetch_professor_reviews_for_class(name, "ENSC503")
     print(reviews_for_class)
     tags = ProfInfoController.fetch_professor_tags(name)
