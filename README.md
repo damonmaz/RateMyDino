@@ -4,6 +4,10 @@
 
 We currently have this project deployed at https://ratemydino.vercel.app/
 
+To sign in to the website, please use a gmail account.
+
+Go to the dashboard and enter the name of a prof to access their LLM summaries.
+
 ## To run frontend:
 
 Set the current working directory to src/presentation/my-app/
