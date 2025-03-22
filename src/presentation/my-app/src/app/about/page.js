@@ -29,7 +29,7 @@ export default function AboutUs() {
         }`}
       ></div>
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-6 text-center">
+      <div className="absolute inset-0 top-[80px] flex flex-col items-center justify-center text-white px-6 text-center">
         <h1
           className={`text-5xl font-bold mb-6 transition-all duration-700 ${
             fadeIn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
