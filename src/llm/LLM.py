@@ -1,6 +1,8 @@
 import os
 from openai import OpenAI # type: ignore
 from models.profInfo import ProfInfoModel
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
 class LlmReviews:
     client = OpenAI(
@@ -59,9 +61,11 @@ class LlmReviews:
         return completion.choices[0].message.content
 
 if __name__ == "__main__":
-    print ("Brian Grant")
-    sample_reviews = ProfInfoModel.get_professor_reviews("Brian Grant")
-
+    
+    name = "Yuval Sanders"  
+    print (name)
+    prof_id = ProfInfoModel.get_professor_ID(name)
+    sample_reviews = ProfInfoModel.get_all_professor_reviews(prof_id)
     summary = LlmReviews.summarize_all_classes_reviews(sample_reviews)
     print(summary)
 

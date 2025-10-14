@@ -1,10 +1,12 @@
 import os
 import mysql.connector  # type: ignore
+from dotenv import load_dotenv, find_dotenv
 dbhost = os.environ.get("db_host")
 dbuser = os.environ.get("db_user")
 dbpwd = os.environ.get("db_password")
 dbname = os.environ.get("db_name")
 
+load_dotenv(find_dotenv())
 class Database:
 
     def get_connection():
