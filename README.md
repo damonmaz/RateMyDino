@@ -1,54 +1,36 @@
-# RateMyDino project for SENG 401, group 17
+# 🦖 RateMyDino
 
-## Wesbite
+## 🌐 Live Website  
+Visit the live platform here: [https://rate-my-dino.vercel.app/](https://rate-my-dino.vercel.app/)  
 
-We currently have this project deployed at https://ratemydino.vercel.app/
+Sign in with your **Gmail account**, navigate to the **Dashboard**, and simply type the name of a professor to instantly access AI-generated summaries of their reviews.
 
-To sign in to the website, please use a gmail account.
+---
 
-Navigate to the dashboard and enter the name of a prof to access their LLM summaries.
+## 📊 About the Project  
 
-Note: This repo does not include the .env keys required to run RateMyDino locally. For evaluation, please use the link above.
+**RateMyDino** is an AI-powered web application designed to make exploring professor feedback faster, smarter, and more insightful. Our platform automatically **scrapes and aggregates real student reviews and ratings from RateMyProfessor for over 3,213 University of Calgary professors**. All collected data is securely stored in our backend database, ensuring a comprehensive and searchable repository of teaching feedback.
 
-## To run frontend:
+Instead of scrolling through countless individual comments, **RateMyDino leverages a Large Language Model (LLM) to analyze and summarize thousands of reviews into concise, meaningful insights**. This allows students to quickly understand each professor’s teaching style, strengths, and overall classroom experience — helping them make informed decisions about their courses.
 
-Set the current working directory to src/presentation/my-app/
+---
 
-Then, run the development server:
+## 🚀 Key Features  
 
-```bash
-npm install
-#and then
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Automated Data Collection:** Scrapes real student reviews and ratings directly from RateMyProfessor.  
+- **Extensive Database:** Contains feedback on **3,213+ professors** from the University of Calgary.  
+- **AI-Driven Summaries:** Uses LLMs to generate clear, concise summaries from thousands of student comments.  
+- **User-Friendly Dashboard:** Quickly search professors and view their summarized profiles in seconds.  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📺 Demo  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🎥 Watch the demo of RateMyDino in action: [https://www.youtube.com/watch?v=G8BrJDMgNyg](https://www.youtube.com/watch?v=G8BrJDMgNyg)  
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🎯 Why RateMyDino  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Navigating course choices shouldn’t feel overwhelming. With RateMyDino, students can skip the noise and **get straight to the insights that matter most** — empowering them to make confident decisions based on the collective voice of their peers.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## To run the backend:
-
-Set the current working directory to src/
-
-Run app.py
-
-```bash
-python app.py
-```
