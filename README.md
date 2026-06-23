@@ -1,5 +1,8 @@
 # 🦖 RateMyDino
 
+## NOTE
+Due to our Amazon Web Services free trial running out, the SQL database is no longer running and reviews are no longer stored. Sorry for the inconvenience!
+
 ## 🌐 Live Website  
 Visit the live platform here: [https://ratemydino.vercel.app/](https://ratemydino.vercel.app/)  
 
