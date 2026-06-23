@@ -1,7 +1,7 @@
 # 🦖 RateMyDino
 
 ## 🌐 Live Website  
-Visit the live platform here: [https://rate-my-dino.vercel.app/](https://rate-my-dino.vercel.app/)  
+Visit the live platform here: [https://ratemydino.vercel.app/](https://ratemydino.vercel.app/)  
 
 Sign in with your **Gmail account**, navigate to the **Dashboard**, and simply type the name of a professor to instantly access AI-generated summaries of their reviews.
 
